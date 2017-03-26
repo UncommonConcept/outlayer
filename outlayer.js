@@ -6,9 +6,19 @@
 
 ( function( window, factory ) {
   'use strict';
+  if(!window) return;
   // universal module definition
   /* jshint strict: false */ /* globals define, module, require */
-  if ( typeof define == 'function' && define.amd ) {
+  if ( typeof module == 'object' && module.exports ) {
+    // CommonJS - Browserify, Webpack
+    module.exports = factory(
+      window,
+      require('ev-emitter'),
+      require('get-size'),
+      require('fizzy-ui-utils'),
+      require('./item')
+    );
+  } else if ( typeof define == 'function' && define.amd ) {
     // AMD - RequireJS
     define( [
         'ev-emitter/ev-emitter',
@@ -19,15 +29,6 @@
       function( EvEmitter, getSize, utils, Item ) {
         return factory( window, EvEmitter, getSize, utils, Item);
       }
-    );
-  } else if ( typeof module == 'object' && module.exports ) {
-    // CommonJS - Browserify, Webpack
-    module.exports = factory(
-      window,
-      require('ev-emitter'),
-      require('get-size'),
-      require('fizzy-ui-utils'),
-      require('./item')
     );
   } else {
     // browser global

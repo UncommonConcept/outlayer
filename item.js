@@ -3,21 +3,22 @@
  */
 
 ( function( window, factory ) {
+  if(!window) return;
   // universal module definition
   /* jshint strict: false */ /* globals define, module, require */
-  if ( typeof define == 'function' && define.amd ) {
+  if ( typeof module == 'object' && module.exports ) {
+    // CommonJS - Browserify, Webpack
+    module.exports = factory(
+      require('ev-emitter'),
+      require('get-size')
+    );
+  } else if ( typeof define == 'function' && define.amd ) {
     // AMD - RequireJS
     define( [
         'ev-emitter/ev-emitter',
         'get-size/get-size'
       ],
       factory
-    );
-  } else if ( typeof module == 'object' && module.exports ) {
-    // CommonJS - Browserify, Webpack
-    module.exports = factory(
-      require('ev-emitter'),
-      require('get-size')
     );
   } else {
     // browser global

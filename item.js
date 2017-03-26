@@ -443,7 +443,9 @@ proto.stagger = function( delay ) {
 
 // remove element from DOM
 proto.removeElem = function() {
-  this.element.parentNode.removeChild( this.element );
+  if(this.element.parentNode) {
+    this.element.parentNode.removeChild( this.element );
+  }
   // remove display: none
   this.css({ display: '' });
   this.emitEvent( 'remove', [ this ] );

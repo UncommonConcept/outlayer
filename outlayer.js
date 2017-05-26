@@ -41,7 +41,7 @@
     );
   }
 
-}( window, function factory( window, EvEmitter, getSize, utils, Item ) {
+}( typeof window !== "undefined" ? window : this || {}, function factory( window, EvEmitter, getSize, utils, Item ) {
 'use strict';
 
 // ----- vars ----- //

@@ -29,7 +29,7 @@
     );
   }
 
-}( window, function factory( EvEmitter, getSize ) {
+}( typeof window !== "undefined" ? window : this || {}, function factory( EvEmitter, getSize ) {
 'use strict';
 
 // ----- helpers ----- //
